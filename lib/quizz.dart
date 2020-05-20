@@ -53,4 +53,12 @@ class Quizz {
       _actualQuestion++;
     }
   }
+
+  bool isOnLimitQuestion() {
+    return _actualQuestion == _questions.length - 1;
+  }
+
+  void reset() {
+    _actualQuestion = 0;
+  }
 }

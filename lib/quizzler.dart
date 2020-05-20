@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 
 import 'quizz.dart';
 
@@ -14,13 +15,28 @@ class _QuizPageState extends State<QuizPage> {
 
   void checkAnswer(bool choicedByUser) {
     bool isAnswerCorrect = quizz.getCorrectAnswer(choicedByUser);
-    if (isAnswerCorrect) {
-      print('Correct');
-    } else {
-      print('False');
-    }
-
     setState(() {
+      if (quizz.isOnLimitQuestion()) {
+        Alert(
+                context: context,
+                title: "Quizzer",
+                desc: "You answers all the questions")
+            .show();
+
+        quizz.reset();
+        score = [];
+      } else {
+        if (isAnswerCorrect) {
+          score.add(
+            Icon(Icons.check, color: Colors.green),
+          );
+        } else {
+          score.add(
+            Icon(Icons.close, color: Colors.red),
+          );
+        }
+      }
+
       quizz.goToNextQuestion();
     });
   }
