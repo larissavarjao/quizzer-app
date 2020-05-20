@@ -7,7 +7,6 @@ This is an app to practice flutter and answer questions and keep your score.
 ```shell
 cd quizzer-app/
 flutter run
-
 ```
 
 Or do Fn + F5 if you're on mac notebook
