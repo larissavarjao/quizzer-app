@@ -18,7 +18,7 @@ You can see when you click the app, that you will answer questions and keep your
 
 View of the app
 
-![view of app](images/app-view.png)
+![view of app](images/app-video.gif)
 
 ## Technologies
 
