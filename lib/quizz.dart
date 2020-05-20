@@ -1,108 +1,56 @@
-import 'package:flutter/material.dart';
+// Abstraction - quando a gente transforma as cosias em classe para representar objetos da vida real (class)
+
+// Encapsulation - quando a gente guarda os valores das variaveis pra não ficar aberta e as pessoas poderem mudar (colocar _ e definir metodos)
+
+// Inheritance - quando a gente herda de outras classes metodos e propriedades usando a palavra (extends)
+
+// Polymorphism - quando você sobreescreve os methodos que está herdando do pai (@override e super)
+// o super serve pra vc pegar as propriedades do pai e poder adicionar mais coisas
+// @override serve pra você sobreescrever o metodo, colocar um novo no lugar
 
 import 'question.dart';
 
-class QuizPage extends StatefulWidget {
-  @override
-  _QuizPageState createState() => _QuizPageState();
-}
-
-class _QuizPageState extends State<QuizPage> {
-  List<Icon> score = [];
-
-  List<Question> questions = [
+class Quizz {
+  int _actualQuestion = 0;
+  List<Question> _questions = [
+    Question('Some cats are actually allergic to humans', true),
     Question('You can lead a cow down stairs but not up stairs.', false),
     Question('Approximately one quarter of human bones are in the feet.', true),
-    Question('A slug\'s blood is green.', true)
+    Question('A slug\'s blood is green.', true),
+    Question('Buzz Aldrin\'s mother\'s maiden name was \"Moon\".', true),
+    Question('It is illegal to pee in the Ocean in Portugal.', true),
+    Question(
+        'No piece of square dry paper can be folded in half more than 7 times.',
+        false),
+    Question(
+        'In London, UK, if you happen to die in the House of Parliament, you are technically entitled to a state funeral, because the building is considered too sacred a place.',
+        true),
+    Question(
+        'The loudest sound produced by any animal is 188 decibels. That animal is the African Elephant.',
+        false),
+    Question(
+        'The total surface area of two human lungs is approximately 70 square metres.',
+        true),
+    Question('Google was originally called \"Backrub\".', true),
+    Question(
+        'Chocolate affects a dog\'s heart and nervous system; a few ounces are enough to kill a small dog.',
+        true),
+    Question(
+        'In West Virginia, USA, if you accidentally hit an animal with your car, you are free to take it home to eat.',
+        true),
   ];
 
-  int actualQuestion = 0;
+  String getQuestionText() {
+    return _questions[_actualQuestion].questionText;
+  }
 
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: <Widget>[
-        Expanded(
-          flex: 5,
-          child: Padding(
-            padding: EdgeInsets.all(10.0),
-            child: Center(
-              child: Text(
-                questions[actualQuestion].questionText,
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 25.0,
-                  color: Colors.white,
-                ),
-              ),
-            ),
-          ),
-        ),
-        Expanded(
-          child: Padding(
-            padding: EdgeInsets.all(15.0),
-            child: FlatButton(
-              textColor: Colors.white,
-              color: Colors.green,
-              child: Text(
-                'True',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 20.0,
-                ),
-              ),
-              onPressed: () {
-                setState(() {
-                  bool isAnswerCorrect =
-                      questions[actualQuestion].questionAnswer == true;
+  bool getCorrectAnswer(bool response) {
+    return _questions[_actualQuestion].questionAnswer == response;
+  }
 
-                  if (isAnswerCorrect) {
-                    print('Correct');
-                  } else {
-                    print('False');
-                  }
-
-                  actualQuestion++;
-                });
-              },
-            ),
-          ),
-        ),
-        Expanded(
-          child: Padding(
-            padding: EdgeInsets.all(15.0),
-            child: FlatButton(
-              color: Colors.red,
-              child: Text(
-                'False',
-                style: TextStyle(
-                  fontSize: 20.0,
-                  color: Colors.white,
-                ),
-              ),
-              onPressed: () {
-                setState(() {
-                  bool isAnswerCorrect =
-                      questions[actualQuestion].questionAnswer == false;
-
-                  if (isAnswerCorrect) {
-                    print('Correct');
-                  } else {
-                    print('False');
-                  }
-
-                  actualQuestion++;
-                });
-              },
-            ),
-          ),
-        ),
-        Row(
-          children: score,
-        )
-      ],
-    );
+  void goToNextQuestion() {
+    if (_actualQuestion < _questions.length - 1) {
+      _actualQuestion++;
+    }
   }
 }
